@@ -782,3 +782,36 @@ REMOVE A IF (-1 Barrera_Inicial_Estrict_SN) (0 N OR A + $$FemSg LINK 0 N OR NP) 
 
 REMOVE A IF (-1 Barrera_Inicial_Estrict_SN) (0 N OR A + $$FemPl LINK 0 N OR NP) (1 A OR PP + $$FemPl) (NOT 0 Ordinal) ;
 ##velhas bonitas
+
+LIST FIRSTPRN = (prn tn p1 mf sg) ;
+LIST THIRDPRNM = (prn tn p3 m sg) ;
+LIST THIRDPRNF = (prn tn p3 f sg) ;
+LIST FIRSTFTS = (fts p1 sg) ;
+LIST THIRDFTS = (fts p3 sg) ;
+LIST FIRSTCNI = (cni p1 sg) ;
+LIST THIRDCNI = (cni p3 sg) ;
+LIST VERB = vblex ;
+
+## If a future subjunctive verb is preceded by "eu," it functions as a first person singular future subjunctive verb form.
+
+SELECT FIRSTFTS IF
+    (-1 FIRSTPRN)
+    (0 VERB) ;
+
+## If a future subjunctive verb is preceded by "ele" or "ela," it functions as a third person singular future subjunctive verb form.
+
+SELECT FIRSTFTS IF
+    (-1 THIRDPRNM OR THIRDPRNF)
+    (0 VERB) ;
+
+## If a conditional verb is preceded by "eu," it functions as a first person singular conditional verb form.
+
+SELECT FIRSTCNI IF
+    (-1 FIRSTPRN)
+    (0 VERB) ;
+
+	## If a conditional verb is preceded by "ele" or "ela," it functions as a third person singular conditional verb form.
+
+SELECT FIRSTCNI IF
+    (-1 THIRDPRNM OR THIRDPRNF)
+    (0 VERB) ;
